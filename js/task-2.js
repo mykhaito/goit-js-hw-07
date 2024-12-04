@@ -25,25 +25,13 @@ const images = [
   },
 ];
 const gallery = document.querySelector('.gallery');
-//gallery styles
-gallery.style.display = 'flex';
-gallery.style.gap = '10px';
-gallery.style.padding = '0';
-gallery.style.margin = '0';
-gallery.style.listStyle = 'none';
+const markup = images
+  .map(
+    ({ url, alt }) =>
+      `<li><img src="${url}" alt="${alt}" class="gallery-image"></li>`
+  )
+  .join('');
 
-for (let i = 0; i < images.length; i++) {
-  const li = document.createElement('li');
-  const img = document.createElement('img');
-  img.src = images[i].url;
-  img.alt = images[i].alt;
-  li.append(img);
-  gallery.append(li);
-
-  // img styles
-  img.style.width = '200px';
-  img.style.height = '100%';
-  img.style.borderRadius = '10px';
-}
+gallery.insertAdjacentHTML('beforeend', markup);
 
 console.log(gallery);
