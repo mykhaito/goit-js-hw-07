@@ -4,40 +4,38 @@ function getRandomHexColor() {
     .padStart(6, 0)}`;
 }
 
-const controls = document.querySelector('#controls');
-const input = controls.querySelector('input');
-const createBtn = controls.querySelector('[data-create]');
-const destroyBtn = controls.querySelector('[data-destroy]');
-const boxesContainer = document.querySelector('#boxes');
+const boxes = document.querySelector('#boxes');
+const create = document.querySelector('[data-create]');
+const destroy = document.querySelector('[data-destroy]');
+const input = document.querySelector('input');
 
 function createBoxes(amount) {
   destroyBoxes();
 
-  const elements = [];
   let size = 30;
+  const elements = [];
 
   for (let i = 0; i < amount; i++) {
     const box = document.createElement('div');
     box.style.width = `${size}px`;
     box.style.height = `${size}px`;
     box.style.backgroundColor = getRandomHexColor();
-    box.style.margin = '5px';
     elements.push(box);
     size += 10;
   }
 
-  boxesContainer.append(...elements);
+  boxes.append(...elements);
 }
 
 function destroyBoxes() {
-  boxesContainer.innerHTML = '';
+  boxes.innerHTML = '';
 }
 
-createBtn.addEventListener('click', () => {
+create.addEventListener('click', () => {
   const amount = parseInt(input.value.trim(), 10);
 
-  if (isNaN(amount) || amount < 1 || amount > 100) {
-    alert('Please enter a number between 1 and 100!');
+  if (amount < 1 || amount > 100) {
+    alert('Try with valid num');
     return;
   }
 
@@ -45,4 +43,4 @@ createBtn.addEventListener('click', () => {
   input.value = '';
 });
 
-destroyBtn.addEventListener('click', destroyBoxes);
+destroy.addEventListener('click', destroyBoxes);
